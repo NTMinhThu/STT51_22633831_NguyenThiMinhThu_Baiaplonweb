@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTXVN</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <style>
+        .product-card {
+            position: relative;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ff5e5e;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 18px;
+            color: #e74c3c;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .content {
+            margin-top: 10px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #d51616;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .modal {
+            display: none; /* Ẩn modal ban đầu */
+            position: fixed; /* Giữ modal ở vị trí cố định */
+            z-index: 1; /* Để modal nằm trên các thành phần khác */
+            left: 37%;
+            width: 500px; /* Toàn bộ chiều rộng */
+            height: 500px; /* Toàn bộ chiều cao */
+            overflow: auto; /* Nếu cần cuộn thì cho phép */
+        }
+
+        .modal-content {
+            text-align: justify;
+            background-color: rgb(243, 253, 255);
+            margin: 15% auto; /* Căn giữa modal */
+            padding: 20px;
+        }
+
+        .close {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black; /* Màu khi hover */
+            text-decoration: none; /* Không gạch chân */
+            cursor: pointer; /* Hiển thị con trỏ tay */
+        }
+    </style>
+</head>
+<body>
+    <div style="border: 1px solid;" class="container">
+        <div style="background-color: rgb(196, 242, 255)"; class="row">
+            <div class="col-3">
+                <a href="../html/home.html"><img src="../img/logo.png" alt=""></a>
+            </div>
+            <div class="col-5">
+                <form action="">
+                    <input style="border-radius: 10px; margin-top: 40px; width: 350px;height: 33px;  margin-left: 100px;" type="search" name="" id="" placeholder="Tìm kiếm">
+                    <button style="border-radius: 10px; height: 33px; " >Tìm</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="d-flex" action="">
+                    <a style="text-decoration: none;" class="d-flex" href="../html/checkout.html">
+                        <img style="width: 40px;height: 50px; margin-top: 27px;" src="../img/giohang.jpg" alt="">
+                    <h6 style="  margin-left: 30px;margin-top: 47px;color: black;">GIỎ HÀNG</h6></a>
+                    <a style="text-decoration: none;" class="d-flex" href="../html/login.html">
+                        <img style="width: 36px;height: 35px; margin-top: 33px; margin-left: 30px;" src="../img/taikhoan.jpg" alt="">
+                        <h6 style="  margin-left: 30px;margin-top: 47px; color: black; ">TÀI KHOẢN</h6></a>
+                    </a>
+                </form>
+                </div>
+            </div>
+            <div style="background-color: rgb(9, 81, 182);color:white" class="row" >
+                <div class="col-2"></div>
+                <div class="col-10">
+                    <ul class="nav">
+                        <li  class="nav-item">
+                            <a class="nav-link text-white" href="../html/productlist.html">DANH SÁCH BÁO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../html/product1.html">BÁO ĐỜI SỐNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../html/product2.html">BÁO KHOA HỌC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../html/product3.html">BÁO PHÁP LUẬT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../html/new.html">TUẦN TIN TỨC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../html/sitemap.html">SITEMAP</a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                
+                <div class="row">
+                <div class="container">
+                    <main class="row" style="margin-top: 40px;">
+                        <div class="col-3 product-card">
+                        <div class="discount">-5%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc1.jpg" alt="Khoa học phát triển">
+                        <div class="content">
+                            <h3 style="height: 100px;">Khoa học phát triển nông thôn Việt Nam</h3>
+                            <div class="price">9.500 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Khoa học phát triển nông thôn Việt Nam', 9500)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'Khoa học phát triển nông thôn Việt Nam',
+                                'Nhà xuất bản: Nhà xuất bản Khoa học và Kỹ thuật<br>Ngày xuất bản: Tháng 8 năm 2023<br>Tóm tắt nội dung: Tài liệu này khám phá các phương pháp phát triển bền vững trong nông nghiệp tại Việt Nam. Nó cung cấp cái nhìn tổng quan về các ứng dụng thực tiễn và ảnh hưởng của các chiến lược phát triển nông thôn đến nền kinh tế địa phương. Nội dung chi tiết sẽ giúp bạn hiểu rõ hơn về các chính sách, nghiên cứu mới nhất trong lĩnh vực này, từ quản lý tài nguyên đến phát triển bền vững. Cuốn sách cũng đề cập đến những thách thức mà nông dân phải đối mặt và cách họ ứng phó với biến đổi khí hậu.',
+                                'Giá: 9.500 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                
+                    <div class="col-3 product-card">
+                        <div class="discount">-10%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc2.jpg" alt="Báo khoa học và công nghệ">
+                        <div class="content">
+                            <h3 style="height: 100px;">Báo khoa học và công nghệ</h3>
+                            <div class="price">12.000 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Báo khoa học và công nghệ', 12000)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'Báo khoa học và công nghệ',
+                                'Nhà xuất bản: Nhà xuất bản Khoa học và Công nghệ<br>Ngày xuất bản: Tháng 9 năm 2023<br>Tóm tắt nội dung: Cuốn báo này tập hợp những nghiên cứu mới nhất trong lĩnh vực khoa học và công nghệ. Độc giả sẽ được khám phá những công nghệ tiên tiến và ứng dụng của chúng trong cuộc sống hàng ngày. Tài liệu bao gồm các bài viết phân tích và đánh giá các xu hướng công nghệ mới nổi trên toàn cầu, từ trí tuệ nhân tạo đến công nghệ sinh học, giúp bạn cập nhật những thay đổi trong thế giới khoa học hiện đại.',
+                                'Giá: 12.000 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                
+                    <div class="col-3 product-card">
+                        <div class="discount">-10%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc3.jfif" alt="Báo khoa học - Sức sống mới">
+                        <div class="content">
+                            <h3 style="height: 100px;">Báo khoa học - Sức sống mới</h3>
+                            <div class="price">12.000 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Báo khoa học - Sức sống mới', 12000)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'Báo khoa học - Sức sống mới',
+                                'Nhà xuất bản: Nhà xuất bản Văn hóa Thông tin<br>Ngày xuất bản: Tháng 6 năm 2023<br>Tóm tắt nội dung: Cuốn báo này khám phá những xu hướng mới trong khoa học đời sống. Nội dung bao gồm các nghiên cứu mới về sức khỏe con người và môi trường, từ bệnh tật đến sự ảnh hưởng của các yếu tố môi trường. Tài liệu sẽ giúp bạn có cái nhìn sâu sắc hơn về sự phát triển trong các lĩnh vực khoa học liên quan đến sức khỏe, đồng thời phân tích những thách thức mà chúng ta phải đối mặt trong tương lai.',
+                                'Giá: 12.000 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                
+                    <div class="col-3 product-card">
+                        <div class="discount">-10%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc4.jfif" alt="Khoa học phổ thông - Thời sự Y học">
+                        <div class="content">
+                            <h3 style="height: 100px;">Khoa học phổ thông - Thời sự Y học</h3>
+                            <div class="price">12.000 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Khoa học phổ thông - Thời sự Y học', 12000)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'Khoa học phổ thông - Thời sự Y học',
+                                'Nhà xuất bản: Nhà xuất bản Y học<br>Ngày xuất bản: Tháng 10 năm 2023<br>Tóm tắt nội dung: Cuốn báo này cung cấp cái nhìn toàn diện về các vấn đề y học nóng bỏng hiện nay. Tài liệu bao gồm những phân tích chi tiết và thông tin mới nhất về các bệnh tật, phương pháp điều trị hiện đại và những nghiên cứu mới trong ngành y tế. Nội dung sẽ giúp bạn hiểu rõ hơn về các thách thức mà ngành y tế đang phải đối mặt và những giải pháp đang được áp dụng để cải thiện sức khỏe cộng đồng.',
+                                'Giá: 12.000 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                
+                    <div class="col-3 product-card">
+                        <div class="discount">-10%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc5.jfif" alt="Nghiên cứu hành vi tiêu dùng của khách du lịch nội địa">
+                        <div class="content">
+                            <h3 style="height: 100px;">Nghiên cứu hành vi tiêu dùng của khách du lịch nội địa</h3>
+                            <div class="price">12.000 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Nghiên cứu hành vi tiêu dùng của khách du lịch nội địa', 12000)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'Nghiên cứu hành vi tiêu dùng của khách du lịch nội địa',
+                                'Nhà xuất bản: Nhà xuất bản Du lịch<br>Ngày xuất bản: Tháng 11 năm 2023<br>Tóm tắt nội dung: Báo cáo này cung cấp cái nhìn sâu sắc về xu hướng tiêu dùng của khách du lịch trong nước. Tài liệu nghiên cứu về sở thích, nhu cầu và thói quen tiêu dùng của khách du lịch Việt Nam, đồng thời phân tích các yếu tố ảnh hưởng đến sự lựa chọn điểm đến, dịch vụ, và các hoạt động giải trí. Nội dung sẽ giúp bạn hiểu rõ hơn về thị trường du lịch trong nước và cách nâng cao trải nghiệm khách hàng.',
+                                'Giá: 12.000 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                
+                    <div class="col-3 product-card">
+                        <div class="discount">-10%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc6.jfif" alt="Khoa học công nghệ chăn nuôi">
+                        <div class="content">
+                            <h3 style="height: 100px;">Khoa học công nghệ chăn nuôi</h3>
+                            <div class="price">12.000 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Khoa học công nghệ chăn nuôi', 12000)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'Khoa học công nghệ chăn nuôi',
+                                'Nhà xuất bản: Nhà xuất bản Nông nghiệp<br>Ngày xuất bản: Tháng 12 năm 2023<br>Tóm tắt nội dung: Cuốn sách này khám phá những công nghệ mới trong chăn nuôi gia súc và gia cầm. Tài liệu cung cấp thông tin chi tiết về các phương pháp chăn nuôi hiện đại, từ đó nâng cao hiệu quả sản xuất và chất lượng sản phẩm. Bạn sẽ tìm thấy các nghiên cứu và ứng dụng thực tiễn trong ngành chăn nuôi, giúp nâng cao sự phát triển bền vững trong ngành nông nghiệp.',
+                                'Giá: 12.000 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                
+                    <div class="col-3 product-card">
+                        <div class="discount">-10%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc7.jfif" alt="JAEC">
+                        <div class="content">
+                            <h3 style="height: 100px;">JAEC</h3>
+                            <div class="price">12.000 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('JAEC', 12000)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'JAEC',
+                                'Nhà xuất bản: Nhà xuất bản Nông nghiệp và Phát triển nông thôn<br>Ngày xuất bản: Tháng 5 năm 2023<br>Tóm tắt nội dung: Tạp chí JAEC chuyên sâu về các nghiên cứu và phân tích trong lĩnh vực nông nghiệp. Nội dung bao gồm các báo cáo nghiên cứu, ý kiến chuyên gia và các vấn đề thời sự trong ngành nông nghiệp hiện đại. Đây là tài liệu hữu ích cho các nhà nghiên cứu, học giả và sinh viên trong lĩnh vực này, giúp họ cập nhật những tiến bộ mới và xu hướng phát triển trong nông nghiệp.',
+                                'Giá: 12.000 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                
+                    <div class="col-3 product-card">
+                        <div class="discount">-10%</div>
+                        <img style="height: 400px;" src="../img/baokhoahoc8.jpg" alt="Nghiên cứu sức khoẻ và phát triển">
+                        <div class="content">
+                            <h3 style="height: 100px;">Nghiên cứu sức khoẻ và phát triển</h3>
+                            <div class="price">12.000 VNĐ</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Nghiên cứu sức khoẻ và phát triển', 12000)">Thêm vào giỏ</button>
+                            <a href="#" class="view-details" onclick="showDetails(
+                                'Nghiên cứu sức khoẻ và phát triển',
+                                'Nhà xuất bản: Nhà xuất bản Y tế công cộng<br>Ngày xuất bản: Tháng 4 năm 2023<br>Tóm tắt nội dung: Báo cáo này nghiên cứu các vấn đề sức khoẻ cộng đồng và phát triển bền vững. Tài liệu bao gồm các chương trình y tế, các vấn đề sức khoẻ cấp bách, và các chiến lược phát triển bền vững. Nội dung sẽ giúp bạn hiểu rõ hơn về các yếu tố ảnh hưởng đến sức khoẻ cộng đồng, từ dinh dưỡng đến chăm sóc sức khoẻ, và những thách thức mà ngành y tế phải đối mặt trong tương lai.',
+                                'Giá: 12.000 VNĐ'
+                            )">Xem chi tiết</a>
+                        </div>
+                    </div>
+                    </main>
+                </div>
+                
+             <!-- Modal -->
+             <div id="product-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h3 id="modal-title"></h3>
+                    <p id="modal-description"></p>
+                    <p id="modal-price"></p>
+                </div>
+            </div>
+            <script>
+                // Function to show product details in a modal
+                function showDetails(title, description, price) {
+                    document.getElementById('modal-title').innerHTML = title;
+                    document.getElementById('modal-description').innerHTML = description;
+                  
+                    document.getElementById('product-modal').style.display = "block";
+                }
+            
+                // Function to close the modal
+                function closeModal() {
+                    document.getElementById('product-modal').style.display = "none";
+                }
+            
+                // Add to cart function (placeholder for actual implementation)
+                function addToCart(productName, price) {
+                    console.log(`Added to cart: ${productName} - Price: ${price} VNĐ`);
+                    alert(`Đã thêm ${productName} vào giỏ hàng!`);
+                }
+            
+                // Close modal on window click
+                window.onclick = function(event) {
+                    const modal = document.getElementById('product-modal');
+                    if (event.target === modal) {
+                        closeModal();
+                    }
+                }
+            
+                            // Hàm thêm sản phẩm vào giỏ hàng
+                            function addToCart(name, price) {
+                                // Lấy giỏ hàng hiện tại từ localStorage, nếu chưa có thì tạo mảng rỗng
+                                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        
+                                // Tìm sản phẩm trong giỏ hàng
+                                const existingProductIndex = cart.findIndex(item => item.name === name);
+                        
+                                if (existingProductIndex > -1) {
+                                    // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+                                    cart[existingProductIndex].quantity += 1; // Tăng số lượng lên 1
+                                } else {
+                                    // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
+                                    cart.push({ name: name, price: price, quantity: 1 }); // Khởi tạo số lượng là 1
+                                }
+                        
+                                // Lưu lại giỏ hàng vào localStorage
+                                localStorage.setItem("cart", JSON.stringify(cart));
+                        
+                                alert("Sản phẩm đã được thêm vào giỏ hàng!");
+                            }
+                        
+                            // Hàm loadCart để hiển thị giỏ hàng
+                            function loadCart() {
+                                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                                let cartItems = document.getElementById("cart-items");
+                        
+                                // Kiểm tra nếu giỏ hàng trống
+                                if (cart.length === 0) {
+                                    cartItems.innerHTML = "<tr><td colspan='5' class='text-center'>Giỏ hàng của bạn đang trống.</td></tr>";
+                                    document.getElementById("total-price").innerHTML = "Tổng cộng: 0 VND";
+                                } else {
+                                    let content = "";
+                                    cart.forEach((item, index) => {
+                                        content += `
+                                            <tr>
+                                                <td style="text-align: center;">
+                                                    <input type="checkbox" class="product-select" data-index="${index}" onchange="updateTotalPrice()">
+                                                </td>
+                                                <td style="text-align: left;">${item.name}</td>
+                                                <td style="text-align: right;">${item.price} VND</td>
+                                                <td style="text-align: center;">${item.quantity}</td>
+                                                <td style="text-align: center;">
+                                                    <button class="btn btn-danger btn-sm" onclick="removeItem(${index})">Xóa</button>
+                                                </td>
+                                            </tr>
+                                        `;
+                                    });
+                                    cartItems.innerHTML = content;
+                                    updateTotalPrice(); // Cập nhật tổng tiền
+                                }
+                            }
+                        
+                            // Hàm xóa một sản phẩm trong giỏ hàng theo index
+                            function removeItem(index) {
+                                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                                cart.splice(index, 1);
+                                localStorage.setItem("cart", JSON.stringify(cart));
+                                loadCart();
+                            }
+                        
+                            // Hàm cập nhật tổng tiền dựa trên các sản phẩm được chọn
+                            function updateTotalPrice() {
+                                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                                let totalPrice = 0;
+                                
+                                // Duyệt qua các checkbox đã chọn và tính tổng
+                                document.querySelectorAll(".product-select:checked").forEach(checkbox => {
+                                    let index = checkbox.getAttribute("data-index");
+                                    let item = cart[index];
+                                    totalPrice += item.price * item.quantity;
+                                });
+                        
+                                document.getElementById("total-price").innerHTML = `<p>Tổng cộng: ${totalPrice} VND</p>`;
+                            }
+                        
+                            // Hàm xóa tất cả sản phẩm khỏi giỏ hàng
+                            function clearCart() {
+                                localStorage.removeItem("cart");
+                                alert("Giỏ hàng của bạn đã được làm mới!");
+                                loadCart();
+                                document.getElementById("total-price").innerHTML = "Tổng cộng: 0 VND";
+                            }
+                        
+                            // Hàm hiển thị form thanh toán
+                            function showPaymentForm() {
+                                document.getElementById("payment-form").style.display = "block";
+                                document.getElementById("payment-success").style.display = "none";
+                            }
+                        
+                            // Hàm xử lý thanh toán
+                            function processPayment(event) {
+                                event.preventDefault();
+                                document.getElementById("payment-form").style.display = "none";
+                                document.getElementById("payment-success").style.display = "block";
+                                clearCart();
+                            }
+                        
+                            // Tải giỏ hàng khi trang được tải
+                            document.addEventListener("DOMContentLoaded", loadCart);
+                        
+                            // Cập nhật giỏ hàng khi có sự kiện 'storage' xảy ra
+                            window.addEventListener("storage", loadCart);
+                        </script>
+
+    <div style="background-color: rgb(9, 81, 182);color:white; margin-left: 0px;" class="row" >
+        <div style="margin-top: 20px;" class="col-3">
+            <h4>GIỚI THIỆU</h4>
+            <ul>
+                <li>Về TTXVN</li>
+                <li>Hệ Thống Cửa Hàng</li>
+                <li>Hoạt Động</li>
+                
+            </ul>
+        </div>
+        <div style="margin-top: 20px;" class="col-3">
+            <h4>THÔNG TIN</h4>
+            <ul>
+                <li>Trạng Thái Đơn Hàng</li>
+                <li>Hình Thức Giao Hàng</li>
+                <li>Hình Thức Thanh Toán</li>
+                <li>Chính Sách Khách Hàng Thân Thiết</li>
+                <li>Chính Sách Bảo Mật Thông Tin Khách Hàng</li>
+            </ul>
+        </div>
+        <div style="margin-top: 20px;" class="col-3">
+            <h4>LIÊN HỆ</h4>
+                <ul>
+                    <li>Địa chỉ: 22 Lý Chiêu , Phường 10, Quận 6, TP. Hồ Chí Minh</li>
+                    <li>Điện thoại: (028) 38 753 443</li>
+                    <li>Email:Liên hệ các vấn đề về đơn hàng Online, kênh cửa hàng, đại lý (offline) : chamsockhachhangttxvn.com.vn</li>
+                    <li>Hotline:  0918.033.133</li>
+                </ul>
+        </div>
+        <div style="margin-top: 20px;" class="col-3">
+            <h4>TRỢ GIÚP</h4>
+                <ul>
+                    <li>Liên Hệ Hợp Tác</li>
+                    <li>Tuyển Dụng</li>
+                    <li>Q&A</li>
+                </ul>
+                <img style="width: 20%;" src="../img/Remove-bg.ai_1730234483627.png" alt="">
+                <img style="width: 35%;" src="../img/Remove-bg.ai_1730234585401.png" alt="">
+                <img style="width: 20%;"src="../img/Remove-bg.ai_1730234700561.png" alt="">
+        </div>
+    </div>
+    <div style="margin-left: 0px;" class="row bg-secondary">
+        <p style="text-align: center; color:aliceblue">
+            Thông tin Tòa soạn - Thông tin Thành Đoàn - Liên hệ Quảng cáo<br>
+            Đường dây nóng: 0918.033.133 - Liên hệ Quảng cáo: 0283.997.4848
+        </p>
+    </div>
+</div>
+</div>
+</body>
+</html>

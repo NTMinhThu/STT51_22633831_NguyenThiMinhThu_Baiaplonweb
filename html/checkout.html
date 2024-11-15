@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTXVN Checkout</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+</head>
+<body>
+    <div style="border: 1px solid;" class="container">
+        <div style="background-color: rgb(196, 242, 255)"; class="row">
+            <div class="col-3">
+                <a href="../html/home.html"><img src="../img/logo.png" alt=""></a>
+            </div>
+            <div class="col-5">
+                <form action="">
+                    <input style="border-radius: 10px; margin-top: 40px; width: 350px;height: 33px;  margin-left: 100px;" type="search" name="" id="" placeholder="Tìm kiếm">
+                    <button style="border-radius: 10px; height: 33px; " >Tìm</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="d-flex" action="">
+                    <a style="text-decoration: none;" class="d-flex" href="../html/checkout.html">
+                        <img style="width: 40px;height: 50px; margin-top: 27px;" src="../img/giohang.jpg" alt="">
+                    <h6 style="  margin-left: 30px;margin-top: 47px;color: black;">GIỎ HÀNG</h6></a>
+                    <a style="text-decoration: none;" class="d-flex" href="login.html">
+                        <img style="width: 36px;height: 35px; margin-top: 33px; margin-left: 30px;" src="../img/taikhoan.jpg" alt="">
+                        <h6 style="  margin-left: 30px;margin-top: 47px; color: black; ">TÀI KHOẢN</h6></a>
+                    </a>
+                </form>
+                
+            </div>
+        </div>
+        <div style="background-color: rgb(9, 81, 182);color:white" class="row" >
+            <div class="col-2"></div>
+            <div class="col-10">
+                <ul class="nav">
+                    <li  class="nav-item">
+                        <a class="nav-link text-white" href="../html/productlist.html">DANH SÁCH BÁO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product1.html">BÁO ĐỜI SỐNG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product2.html">BÁO KHOA HỌC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product3.html">BÁO PHÁP LUẬT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/new.html">TUẦN TIN TỨC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/sitemap.html">SITEMAP</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container">
+                <h1 class="mt-4">Giỏ hàng của bạn</h1>
+                <table class="table table-bordered">
+                    <thead class="table">
+                        <tr>
+                            <th style="text-align: center;">Chọn</th>
+                            <th style="text-align: left;">Tên sản phẩm</th>
+                            <th style="text-align: right;">Đơn giá</th>
+                            <th style="text-align: center;">Số lượng</th>
+                            <th style="text-align: center;">Xoá</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <!-- Các dòng sản phẩm sẽ được thêm vào đây từ JavaScript -->
+                    </tbody>
+                </table>
+            
+                <div id="total-price" class="text-end fs-5 fw-bold mt-3">Tổng cộng: 0 VND</div>
+                
+                <div style="margin-bottom: 20px;" class="d-flex justify-content-between mt-4">
+                    <button id="confirm-payment" class="btn btn-success" onclick="showPaymentForm()">Thanh toán</button>
+                </div>
+            
+                <div id="payment-form" style="display:none; padding: 20px;margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                    <h2>Thông tin thanh toán</h2>
+                    <form onsubmit="processPayment(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                        <input type="text" placeholder="Họ và tên" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="text" placeholder="Địa chỉ" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="text" placeholder="Số điện thoại" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <button type="submit" style="padding: 10px; background-color:brown; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            Xác nhận thanh toán
+                        </button>
+                    </form>
+                </div>
+                
+                <div id="payment-success" style="display:none; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                    <h2>Thanh toán thành công!</h2>
+                    <p>Cảm ơn bạn đã mua hàng!</p>
+                </div>
+                
+                <script>
+                    // Hàm loadCart để hiển thị giỏ hàng
+                    function loadCart() {
+                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        let cartItems = document.getElementById("cart-items");
+                
+                        // Kiểm tra nếu giỏ hàng trống
+                        if (cart.length === 0) {
+                            cartItems.innerHTML = "<tr><td colspan='5' class='text-center'>Giỏ hàng của bạn đang trống.</td></tr>";
+                            document.getElementById("total-price").innerHTML = "Tổng cộng: 0 VND";
+                        } else {
+                            let content = "";
+                            cart.forEach((item, index) => {
+                                content += `
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <input type="checkbox" class="product-select" data-index="${index}" onchange="updateTotalPrice()">
+                                        </td>
+                                        <td style="text-align: left;">${item.name}</td>
+                                        <td style="text-align: right;">${item.price} VND</td>
+                                        <td style="text-align: center;">${item.quantity}</td>
+                                        <td style="text-align: center;">
+                                            <button class="btn btn-danger btn-sm" onclick="removeItem(${index})">Xóa</button>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+                            cartItems.innerHTML = content;
+                            updateTotalPrice(); // Khởi tạo tổng tiền = 0
+                        }
+                    }
+                
+                    // Hàm xóa tất cả sản phẩm không được chọn khỏi giỏ hàng
+                    function removeSelectedItems(selectedItems) {
+                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        // Lọc ra các sản phẩm không được chọn
+                        cart = cart.filter((item, index) => !selectedItems.includes(index.toString())); // Chuyển đổi index thành chuỗi
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        loadCart(); // Cập nhật giỏ hàng
+                    }
+                
+                    // Hàm xóa một sản phẩm trong giỏ hàng theo index
+                    function removeItem(index) {
+                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        cart.splice(index, 1);
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        loadCart();
+                    }
+                
+                    // Hàm cập nhật tổng tiền dựa trên các sản phẩm được chọn
+                    function updateTotalPrice() {
+                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        let totalPrice = 0;
+                        
+                        // Duyệt qua các checkbox đã chọn và tính tổng
+                        document.querySelectorAll(".product-select:checked").forEach(checkbox => {
+                            let index = checkbox.getAttribute("data-index");
+                            let item = cart[index];
+                            totalPrice += item.price * item.quantity;
+                        });
+                
+                        document.getElementById("total-price").innerHTML = `<p>Tổng cộng: ${totalPrice} VND</p>`;
+                    }
+                
+                    // Hàm hiển thị form thanh toán
+                    function showPaymentForm() {
+                        document.getElementById("payment-form").style.display = "block";
+                        document.getElementById("payment-success").style.display = "none";
+                    }
+                
+                    // Hàm xử lý thanh toán
+                    function processPayment(event) {
+                        event.preventDefault();
+                
+                        // Lấy danh sách các sản phẩm đã chọn
+                        const selectedItems = [];
+                        document.querySelectorAll(".product-select:checked").forEach(checkbox => {
+                            selectedItems.push(checkbox.getAttribute("data-index"));
+                        });
+                
+                        // Nếu có sản phẩm được chọn thì tiến hành thanh toán
+                        if (selectedItems.length > 0) {
+                            removeSelectedItems(selectedItems);
+                            document.getElementById("payment-form").style.display = "none";
+                            document.getElementById("payment-success").style.display = "block";
+                            updateTotalPrice(); // Cập nhật lại tổng tiền
+                        } else {
+                            alert("Bạn chưa chọn sản phẩm nào để thanh toán!");
+                        }
+                    }
+                
+                    // Tải giỏ hàng khi trang được tải
+                    document.addEventListener("DOMContentLoaded", loadCart);
+                
+                    // Cập nhật giỏ hàng khi có sự kiện 'storage' xảy ra
+                    window.addEventListener("storage", loadCart);
+                </script>
+            </div>
+            </div>
+            
+                <div style="background-color: rgb(9, 81, 182);color:white" class="row" >
+                    <div style="margin-top: 20px;" class="col-3">
+                        <h4>GIỚI THIỆU</h4>
+                        <ul>
+                            <li> Về TTXVN</li>
+                            <li>Hệ Thống Cửa Hàng</li>
+                            <li>Hoạt Động</li>
+                            
+                        </ul>
+                        
+                    </div>
+                    <div style="margin-top: 20px;" class="col-3">
+                        <h4>THÔNG TIN</h4>
+                        <ul>
+                            <li>Trạng Thái Đơn Hàng</li>
+                            <li>Hình Thức Giao Hàng</li>
+                            <li>Hình Thức Thanh Toán</li>
+                            <li>Chính Sách Khách Hàng Thân Thiết</li>
+                            <li>Chính Sách Bảo Mật Thông Tin Khách Hàng</li>
+                        </ul>
+                    </div>
+                    <div style="margin-top: 20px;" class="col-3">
+                        <h4>LIÊN HỆ</h4>
+                            <ul>
+                                <li>Địa chỉ: 22 Lý Chiêu , Phường 10, Quận 6, TP. Hồ Chí Minh</li>
+                                <li>Điện thoại: (028) 38 753 443</li>
+                                <li>Email:Liên hệ các vấn đề về đơn hàng Online, kênh cửa hàng, đại lý (offline) : chamsockhachhangttxvn.com.vn</li>
+                                <li>Hotline:  0918.033.133</li>
+                            </ul>
+                    </div>
+                    <div style="margin-top: 20px;" class="col-3">
+                        <h4>TRỢ GIÚP</h4>
+                            <ul>
+                                <li>Liên Hệ Hợp Tác</li>
+                                <li>Tuyển Dụng</li>
+                                <li>Q&A</li>
+                            </ul>
+                            <img style="width: 20%;" src="../img/Remove-bg.ai_1730234483627.png" alt="">
+                            <img style="width: 35%;" src="../img/Remove-bg.ai_1730234585401.png" alt="">
+                            <img style="width: 20%;"src="../img/Remove-bg.ai_1730234700561.png" alt="">
+                    </div>
+                </div>
+                <div class="row bg-secondary">
+                    <p style="text-align: center; color:aliceblue">
+                        Thông tin Tòa soạn - Thông tin Thành Đoàn - Liên hệ Quảng cáo<br>
+                        Đường dây nóng: 0918.033.133 - Liên hệ Quảng cáo: 0283.997.4848
+                    </p>
+                </div>
+        </div>
+        </body>
+        </html>

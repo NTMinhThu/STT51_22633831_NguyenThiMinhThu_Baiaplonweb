@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTXVN</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Hàm kiểm tra tính hợp lệ của các trường dữ liệu
+            function validateFields() {
+                let isValid = true;
+                $("#tbten, #tbsdt, #tbdn, #tbmk, #tbmk1").html(''); // Xóa các thông báo lỗi trước đó
+
+                // Kiểm tra họ và tên
+                let hovaten = $("#txtten").val();
+                let checkghoten = /^([A-Z][a-z]*\s)+([A-Z][a-z]*)$/;
+                if (hovaten === "") {
+                    $("#tbten").html("Họ và tên không được để trống");
+                    isValid = false;
+                } else if (!checkghoten.test(hovaten)) {
+                    $("#tbten").html("Tên không hợp lệ");
+                    isValid = false;
+                }
+
+                // Kiểm tra số điện thoại
+                let sdt = $('#txtsdt').val();
+                let checkSdt = /^(0)[0-9]{9}$/;
+                if (sdt === "") {
+                    $('#tbsdt').html('Chưa nhập số điện thoại');
+                    isValid = false;
+                } else if (!checkSdt.test(sdt)) {
+                    $('#tbsdt').html("Số điện thoại không hợp lệ");
+                    isValid = false;
+                }
+
+                // Kiểm tra tên đăng nhập
+                let tdn = $('#txtdn').val();
+                let checkTdn = /^[A-Za-z0-9]{6,}$/;
+                if (tdn === "") {
+                    $('#tbdn').html('Chưa nhập tên đăng nhập');
+                    isValid = false;
+                } else if (!checkTdn.test(tdn)) {
+                    $('#tbdn').html('Tên đăng nhập phải chứa ít nhất 6 ký tự');
+                    isValid = false;
+                }
+
+                // Kiểm tra mật khẩu
+                let mk = $('#txtmk').val();
+                let checkMk = /^[A-Za-z0-9]{6,}$/;
+                if (mk === "") {
+                    $('#tbmk').html('Chưa nhập mật khẩu');
+                    isValid = false;
+                } else if (!checkMk.test(mk)) {
+                    $('#tbmk').html('Mật khẩu phải chứa ít nhất 6 ký tự');
+                    isValid = false;
+                }
+
+                // Kiểm tra xác nhận mật khẩu
+                let mk1 = $('#txtmk1').val();
+                if (mk1 === "") {
+                    $('#tbmk1').html('Chưa nhập lại mật khẩu');
+                    isValid = false;
+                } else if (mk1 !== mk) {
+                    $('#tbmk1').html('Mật khẩu nhập lại không khớp');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            // Khi người dùng nhấn nút "Đăng Kí"
+            $(".btn-danger").click(function (e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của form
+                if (validateFields()) {
+                    const username = $('#txtdn').val();
+                    const password = $('#txtmk').val();
+
+                    // Lưu dữ liệu vào localStorage
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('password', password);
+
+                    // Hiển thị modal thông báo đăng kí thành công
+                    $('#exampleModal').modal('show');
+                } else {
+                    alert("Vui lòng điền đầy đủ thông tin và kiểm tra lại.");
+                }
+            });
+
+            // Khi nhấn nút "Chuyển đến trang đăng nhập"
+            $("#btnRedirect").click(function () {
+                window.location.href = "login.html";
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div style="border: 1px solid;" class="container">
+        <div style="background-color: rgb(196, 242, 255)"; class="row">
+            <div class="col-3">
+                <a href="../html/home.html"><img src="../img/logo.png" alt=""></a>
+            </div>
+            <div class="col-5">
+                <form action="">
+                    <input style="border-radius: 10px; margin-top: 40px; width: 350px;height: 33px;  margin-left: 100px;" type="search" name="" id="" placeholder="Tìm kiếm">
+                    <button style="border-radius: 10px; height: 33px; " >Tìm</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="d-flex" action="">
+                    <a style="text-decoration: none;" class="d-flex" href="#">
+                        <img style="width: 40px;height: 50px; margin-top: 27px;" src="../img/giohang.jpg" alt="">
+                    <h6 style="  margin-left: 30px;margin-top: 47px;color: black;">GIỎ HÀNG</h6></a>
+                    <a style="text-decoration: none;" class="d-flex" href="../html/register.html">
+                        <img style="width: 36px;height: 35px; margin-top: 33px; margin-left: 30px;" src="../img/taikhoan.jpg" alt="">
+                        <h6 style="  margin-left: 30px;margin-top: 47px; color: black; ">TÀI KHOẢN</h6></a>
+                    </a>
+                </form>
+                
+            </div>
+        </div>
+        
+
+        <div style="background-color: rgb(9, 81, 182);color:white" class="row" >
+            <div class="col-2"></div>
+            <div class="col-10">
+                <ul class="nav">
+                    <li  class="nav-item">
+                        <a class="nav-link text-white" href="../html/productlist.html">DANH SÁCH BÁO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product1.html">BÁO ĐỜI SỐNG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product2.html">BÁO KHOA HỌC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product3.html">BÁO PHÁP LUẬT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/new.html">TUẦN TIN TỨC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/sitemap.html">SITEMAP</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Form Đăng Kí -->
+        <div class="row" style="background-image: url(../img/bgdk.jpg);">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <form style="margin-top: 5%;">
+                    <div class="mb-3">
+                        <h5>Họ và Tên:</h5>
+                        <input type="text" id="txtten" placeholder="Tran Van A" class="form-control" style="background-color: white;">
+                        <div id="tbten" style="color: red;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Số Điện Thoại:</h5>
+                        <input type="text" id="txtsdt" placeholder="0123456789" class="form-control" style="background-color: white;">
+                        <div id="tbsdt" style="color: red;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Tên Đăng Nhập:</h5>
+                        <input type="text" id="txtdn" placeholder="abcdef" class="form-control" style="background-color: white;">
+                        <div id="tbdn" style="color: red;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Mật Khẩu:</h5>
+                        <input type="password" id="txtmk" placeholder="21102024" class="form-control" style="background-color: white;">
+                        <div id="tbmk" style="color: red;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Xác Nhận Mật Khẩu:</h5>
+                        <input type="password" id="txtmk1" placeholder="21102024" class="form-control" style="background-color: white;">
+                        <div id="tbmk1" style="color: red;"></div>
+                    </div>
+                    <button type="button" class="btn btn-danger mt-3">Đăng Kí</button>
+                </form>
+
+                <!-- Modal Thông Báo -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Thông Báo</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Đăng kí thành công
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" class="btn btn-primary" id="btnRedirect">Chuyển đến trang đăng nhập</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="row" style="background-color: rgb(9, 81, 182); color: white;">
+            <div class="col-3 mt-4">
+                <h4>GIỚI THIỆU</h4>
+                <ul>
+                    <li>Về TTXVN</li>
+                    <li>Hệ Thống Cửa Hàng</li>
+                    <li>Hoạt Động</li>
+                </ul>
+            </div>
+            <div class="col-3 mt-4">
+                <h4>THÔNG TIN</h4>
+                <ul>
+                    <li>Trạng Thái Đơn Hàng</li>
+                    <li>Hình Thức Giao Hàng</li>
+                    <li>Hình Thức Thanh Toán</li>
+                    <li>Chính Sách Khách Hàng Thân Thiết</li>
+                    <li>Chính Sách Bảo Mật Thông Tin Khách Hàng</li>
+                </ul>
+            </div>
+            <div class="col-3 mt-4">
+                <h4>LIÊN HỆ</h4>
+                <ul>
+                    <li>Địa chỉ: 22 Lý Chiêu , Phường 10, Quận 6, TP. Hồ Chí Minh</li>
+                    <li>Điện thoại: (028) 38 753 443</li>
+                    <li>Email: <a href="mailto:chamsockhachhangttxvn.com.vn">chamsockhachhangttxvn.com.vn</a></li>
+                    <li>Hotline: 0918.033.133</li>
+                </ul>
+            </div>
+            <div class="col-3 mt-4">
+                <h4>TRỢ GIÚP</h4>
+                <ul>
+                    <li>Liên Hệ Hợp Tác</li>
+                    <li>Tuyển Dụng</li>
+                    <li>Q&A</li>
+                </ul>
+                <img style="width: 20%;" src="../img/Remove-bg.ai_1730234483627.png" alt="">
+                <img style="width: 35%;" src="../img/Remove-bg.ai_1730234585401.png" alt="">
+                <img style="width: 20%;"src="../img/Remove-bg.ai_1730234700561.png" alt="">
+            </div>
+        </footer>
+
+        <div class="row bg-secondary">
+            <p style="text-align: center; color: aliceblue;">
+                Thông tin Tòa soạn - Thông tin Thành Đoàn - Liên hệ Quảng cáo<br>
+                Đường dây nóng: 0918.033.133 - Liên hệ Quảng cáo: 0283.997.4848
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

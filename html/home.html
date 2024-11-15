@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTXVN</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <style>
+        .news-container {
+      margin-top: 20px;
+    }
+    
+    .news-item:last-child {
+      border-bottom: none;
+    }
+    .news-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .news-description {
+      font-size: 14px;
+      color: #555;
+    }
+    .news-image {
+      max-width: 100%;
+      height: auto;
+    }
+   
+    .small-text {
+      font-size: 12px;
+    }
+    .product-card {
+        overflow: hidden; /* Giúp hình ảnh không bị tràn ra ngoài */
+        position: relative; /* Để các phần tử con có thể định vị tương đối */
+        transition: transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển động mượt mà */
+    }
+
+    .product-card img {
+        display: block; /* Đảm bảo hình ảnh không có khoảng cách phía dưới */
+        width: 100%; /* Đảm bảo hình ảnh lấp đầy phần tử cha */
+        transition: transform 0.3s, filter 0.3s; /* Hiệu ứng chuyển động mượt mà */
+    }
+
+    .product-card:hover img {
+        transform: scale(1.05); /* Phóng to hình ảnh khi di chuột */
+        filter: brightness(90%); /* Giảm độ sáng khi di chuột */
+    }
+
+    .product-card:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Thêm bóng cho phần tử khi di chuột */
+    }
+</style>
+
+</head>
+<body>
+    <div style="border: 1px solid;" class="container">
+        <div style="background-color: rgb(196, 242, 255)"; class="row">
+            <div class="col-3">
+                <a href="../html/home.html"><img src="../img/logo.png" alt=""></a>
+            </div>
+            <div class="col-5">
+                <form action="">
+                    <input style="border-radius: 10px; margin-top: 40px; width: 350px;height: 33px;  margin-left: 100px;" type="search" name="" id="" placeholder="Tìm kiếm">
+                    <button style="border-radius: 10px; height: 33px; " >Tìm</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="d-flex" action="">
+                    <a style="text-decoration: none;" class="d-flex" href="../html/checkout.html">
+                        <img style="width: 40px;height: 50px; margin-top: 27px;" src="../img/giohang.jpg" alt="">
+                    <h6 style="  margin-left: 30px;margin-top: 47px;color: black;">GIỎ HÀNG</h6></a>
+                    <a style="text-decoration: none;" class="d-flex" href="../html/login.html">
+                        <img style="width: 36px;height: 35px; margin-top: 33px; margin-left: 30px;" src="../img/taikhoan.jpg" alt="">
+                        <h6 style="  margin-left: 30px;margin-top: 47px; color: black; ">TÀI KHOẢN</h6></a>
+                    </a>
+                </form>
+                
+            </div>
+        </div>
+        <div style="background-color: rgb(9, 81, 182);color:white" class="row" >
+            <div class="col-2"></div>
+            <div class="col-10">
+                <ul class="nav">
+                    <li  class="nav-item">
+                        <a class="nav-link text-white" href="../html/productlist.html">DANH SÁCH BÁO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product1.html">BÁO ĐỜI SỐNG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product2.html">BÁO KHOA HỌC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/product3.html">BÁO PHÁP LUẬT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/new.html">TUẦN TIN TỨC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/sitemap.html">SITEMAP</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <a style="text-decoration: none;" href="../html/new1.html"> 
+                    <h4 style="color:black; font-size: 17px;margin-top: 20px;" > Thường trực Ban Bí thư Lương Cường làm Chủ tịch nước</h4>
+                    <form class="d-flex"action="">
+                        <img style="width: 170px;height: 120px;" src="../img/h1.jpg" alt="">
+                        <p style="margin-left: 15px; color:black; text-decoration: none; ">Chiều 21/10, Thường trực Ban Bí thư Lương Cường được Quốc hội khóa 15 bầu giữ chức Chủ tịch nước nhiệm kỳ 2021-2026.</p>
+                    </form >
+                </a>
+                <hr>
+                <a style="text-decoration: none;" href="../html/new2.html">
+                    <h4 style="color:black; font-size: 17px;" >Hơn 1.000 căn hộ phục vụ tái định cư bị bán ra thị trường</h4>
+                    <form class="d-flex" action="">
+                        <img style="width: 170px;height: 120px;" src="../img/h2.jpg" alt="">
+                        <p style="margin-left: 15px; color:black; text-decoration: none; ">1.064 căn hộ tái định cư phục vụ chỉnh trang đô thị, kênh rạch ở quận 8 bị bán thương mại ra thị trường, vi phạm quy định, theo kết luận của Thanh tra TP HCM.</p>
+                    </form>
+                </a>
+                <hr>
+                <a style="text-decoration: none;" href="../html/new3.html">
+                    <h4 style="color:black; font-size: 17px;" >Đề xuất 4 nhóm vấn đề chất vấn tại kỳ họp 8 Quốc hội khóa 15</h4>
+                    <form class="d-flex" action="">
+                        <img style="width: 170px;height: 120px;" src="../img/h3.jpg" alt="">
+                        <p style="margin-left: 15px; color:black; text-decoration: none; ">Đại biểu Quốc hội vừa nhận phiếu xin ý kiến các vấn đề cần chất vấn tại kỳ họp thứ 8, gồm kế hoạch đầu tư, y tế, ngân hàng, thông tin và truyền thông.</p>
+                    </form>
+                </a>
+            </div>
+            <div class="col-8">
+                <div style="padding-top: 18px; width: 100%" id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active" data-bs-interval="500">
+                        <img style="padding-top: 18px; width: 100%" src="../img/h5.jpg" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item" data-bs-interval="500">
+                        <img src="../img/h6.jpg" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item" data-bs-interval="500">
+                        <img src="../img/h7.jpg" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+       
+          <div class="lastest-product">
+            <h3 style="text-align: center; color: rgb(60, 60, 142);font-weight:800;">LASTEST PRODUCT</h3>
+            <div style="margin-bottom: 40px;" class="row">
+                <div class="container">
+                    <main class="row" style="margin-top: 40px;">
+                        <div class="col-3 product-card">
+                            <a href="../html/productlist.html"><img style="height: 400px;"  src="../img/baodoisong1.jpg" alt="Báo ảnh Việt Nam"></a>
+                        </div>   
+                        <div class="col-3 product-card">
+                            <a href="../html/productlist.html"><img style="height: 400px;"  src="../img/baodoisong2.jpg" alt="Báo Hải Phòng"></a>
+                        </div>
+                        <div class="col-3 product-card">
+                            <a href="../html/productlist.html"><img style="height: 400px;"  src="../img/baodoisong3.jpg" alt="Báo Vĩnh Phúc"></a>
+                        </div>
+                        <div class="col-3 product-card">
+                            <a href="../html/productlist.html"><img style="height: 400px;"  src="../img/baodoisong4.jpg" alt="Dân tộc và miền núi"></a>
+                            </div>
+                        </div>
+          </div>
+          <div class="row">
+            <a href="../html/new4.html"><img style="width: 100%;" src="../img/new7.jpg" alt=""></a>
+          </div>
+          
+          <div  class="container mt-5">
+              <div class="row">
+                  <!-- Phần Tư Vấn Hỗ Trợ -->
+                  <div  class="col-md-6 mb-4">
+                      <div  class="card shadow">
+                          <div class="card-header bg-danger text-white text-center">
+                              <h3>Tư Vấn Hỗ Trợ</h3>
+                          </div>
+                          <div class="card-body">
+                              <form id="contactForm">
+                                  <div class="form-group">
+                                      <label for="name">Họ và Tên</label>
+                                      <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên của bạn" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="email">Email</label>
+                                      <input type="email" class="form-control" id="email" name="email" placeholder="Nhập địa chỉ email của bạn" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="phone">Số Điện Thoại</label>
+                                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="issue">Vấn Đề Cần Hỗ Trợ</label>
+                                      <textarea class="form-control" id="issue" name="issue" rows="4" placeholder="Mô tả vấn đề hoặc yêu cầu hỗ trợ của bạn" required></textarea>
+                                  </div>
+                                  <button style="margin-top: 20px;" type="submit" class="btn btn-danger btn-block">Gửi Yêu Cầu</button>
+                                  <div class="alert alert-success mt-3" id="successMessage" style="display: none;">
+                                      Yêu cầu của bạn đã được gửi thành công! Chúng tôi sẽ liên hệ bạn sớm nhất.
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+          
+                  <!-- Phần Ảnh -->
+                  <div class="col-md-6 mb-4">
+                    <img src="../img/app-doc-bao-kiem-tien-6.jpg" alt="Hình ảnh hỗ trợ" class="img-fluid" style="max-height: 230px;width: 550px; border-radius: 8px; padding-top: -20px;padding-left: 40px;">
+                    <img src="../img/docbao.jpg" alt="Hình ảnh hỗ trợ" class="img-fluid" style="max-height: 240px;width: 550px;  border-radius: 8px; padding-top: 20px;padding-left: 40px;">
+                </div>
+                
+              </div>
+          </div>
+          
+          <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+          <script>
+            // Xử lý sự kiện gửi form
+            document.getElementById("contactForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                // Hiển thị thông báo thành công
+                document.getElementById("successMessage").style.display = "block";
+        
+                // Xóa dữ liệu trong các trường sau khi gửi form
+                document.getElementById("contactForm").reset();
+            });
+        </script>
+        
+        </body>
+        <div style="background-color: rgb(9, 81, 182);color:white" class="row" >
+            <div style="margin-top: 20px;" class="col-3">
+                <h4>GIỚI THIỆU</h4>
+                <ul>
+                    <li><a style="color: white;" href="../html/Aboutme.html"> Về TTXVN</li></a>
+                    <li>Hệ Thống Cửa Hàng</li>
+                    <li>Hoạt Động</li>
+                    
+                </ul>
+                
+            </div>
+            <div style="margin-top: 20px;" class="col-3">
+                <h4>THÔNG TIN</h4>
+                <ul>
+                    <li>Trạng Thái Đơn Hàng</li>
+                    <li>Hình Thức Giao Hàng</li>
+                    <li>Hình Thức Thanh Toán</li>
+                    <li>Chính Sách Khách Hàng Thân Thiết</li>
+                    <li>Chính Sách Bảo Mật Thông Tin Khách Hàng</li>
+                </ul>
+            </div>
+            <div style="margin-top: 20px;" class="col-3">
+                <h4>LIÊN HỆ</h4>
+                    <ul>
+                        <li>Địa chỉ: 22 Lý Chiêu , Phường 10, Quận 6, TP. Hồ Chí Minh</li>
+                        <li>Điện thoại: (028) 38 753 443</li>
+                        <li>Email:Liên hệ các vấn đề về đơn hàng Online, kênh cửa hàng, đại lý (offline) : chamsockhachhangttxvn.com.vn</li>
+                        <li>Hotline:  0918.033.133</li>
+                    </ul>
+            </div>
+            <div style="margin-top: 20px;" class="col-3">
+                <h4>TRỢ GIÚP</h4>
+                    <ul>
+                        <li>Liên Hệ Hợp Tác</li>
+                        <li>Tuyển Dụng</li>
+                        <li>Q&A</li>
+                    </ul>
+                    <img style="width: 20%;" src="../img/Remove-bg.ai_1730234483627.png" alt="">
+                    <img style="width: 35%;" src="../img/Remove-bg.ai_1730234585401.png" alt="">
+                    <img style="width: 20%;"src="../img/Remove-bg.ai_1730234700561.png" alt="">
+            </div>
+        </div>
+        <div class="row bg-secondary">
+            <p style="text-align: center; color:aliceblue">
+                Thông tin Tòa soạn - Thông tin Thành Đoàn - Liên hệ Quảng cáo<br>
+                Đường dây nóng: 0918.033.133 - Liên hệ Quảng cáo: 0283.997.4848
+            </p>
+        </div>
+    </div>
+</body>
+</html>
